@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobalytics Clone</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>Jobalytics</h1>
+            </div>
+            <p class="subtitle">Optimize your resume with AI</p>
+        </header>
+
+        <main id="main-content">
+
+
+            <div id="file-input-group" class="input-group">
+                <label for="resume-file" class="file-drop-area">
+                    <span class="text">Click to upload PDF or Docx</span>
+                    <span class="file-name" id="selected-file-name">No file selected</span>
+                    <input type="file" id="resume-file" accept=".pdf,.docx" hidden>
+                </label>
+                <div id="file-preview-container" class="preview-box hidden">
+                    <div class="preview-header">
+                        <span>Extracted Resume Preview</span>
+                        <span id="close-preview" style="cursor: pointer;">×</span>
+                    </div>
+                    <div id="file-preview-text" class="preview-content"></div>
+                </div>
+            </div>
+
+
+
+            <button id="analyze-btn" class="primary-btn">Analyze Job</button>
+
+            <div id="loading" class="loading-container hidden">
+                <div class="spinner"></div>
+                <p>Analyzing with Gemini AI...</p>
+            </div>
+
+            <div id="results" class="results-container hidden">
+                <div class="score-card">
+                    <div class="score-circle">
+                        <svg viewBox="0 0 36 36" class="circular-chart">
+                            <path class="circle-bg"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path id="score-path" class="circle" stroke-dasharray="0, 100"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <text x="18" y="20.35" class="percentage" id="match-score">0%</text>
+                        </svg>
+                    </div>
+                    <h3>Match Score</h3>
+                </div>
+
+                <div class="analysis-sections">
+                    <section>
+                        <h4><span class="dot green"></span> Matched Keywords</h4>
+                        <div id="matched-keywords" class="keyword-tags"></div>
+                    </section>
+
+                    <section>
+                        <h4><span class="dot red"></span> Missing Keywords</h4>
+                        <div id="missing-keywords" class="keyword-tags"></div>
+                    </section>
+
+                    <section class="summary-section">
+                        <h4>Summary</h4>
+                        <p id="analysis-summary" style="font-size: 13px; color: #94a3b8; line-height: 1.4;"></p>
+                    </section>
+
+                    <section class="suggestions-section">
+                        <h4>Suggestions</h4>
+                        <ul id="suggestions-list" style="font-size: 12px; color: #94a3b8; padding-left: 20px;"></ul>
+                    </section>
+
+                    <section class="resume-preview-section">
+                        <h4 id="resume-preview-toggle"
+                            style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                            <span>Extracted Resume Text</span>
+                            <span class="chevron">▼</span>
+                        </h4>
+                        <div id="resume-preview-content" class="hidden"
+                            style="font-size: 12px; color: #94a3b8; line-height: 1.4; max-height: 200px; overflow-y: auto; background: #1e293b; padding: 10px; border-radius: 4px; margin-top: 5px; white-space: pre-wrap;">
+                        </div>
+                    </section>
+                </div>
+
+                <button id="back-btn" class="primary-btn"
+                    style="background: transparent; border: 1px solid var(--border);">Back to Edit</button>
+            </div>
+        </main>
+    </div>
+    <script src="lib/axios.min.js"></script>
+    <script src="lib/pdf.min.js"></script>
+    <script src="popup.js"></script>
+</body>
+
+</html>
