@@ -21,9 +21,17 @@ function getJobDescription() {
     for (const selector of selectors) {
         const element = document.querySelector(selector);
         if (element) {
-            const text = element.innerText.trim();
+            let text = element.innerText;
+            // Collapse extra whitespace mapped to reduce token count
+            text = text.replace(/\\s+/g, ' ').trim();
+            // Strip common boilerplate
+            text = text.replace(/About Us.*$/i, '');
+            text = text.replace(/Equal Opportunity.*$/i, '');
+            text = text.replace(/Diversity, Equity, and Inclusion.*$/i, '');
+            
             if (text.length > 50) {
-                return text;
+                // Apply length capping
+                return text.substring(0, 5000);
             }
         }
     }
