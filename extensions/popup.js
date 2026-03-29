@@ -46,35 +46,19 @@ document.addEventListener('DOMContentLoaded', async () => {
             const file = e.target.files[0];
             selectedFileName.textContent = file.name;
 
-            const previewContainer = document.getElementById('file-preview-container');
-            const previewText = document.getElementById('file-preview-text');
-
-            previewContainer.classList.remove('hidden');
-            previewText.textContent = 'Extracting text locally...';
-
             if (file.type === 'application/pdf') {
                 try {
                     extractedText = await extractTextFromPDF(file);
-                    previewText.textContent = extractedText || 'No text found in resume.';
                 } catch (error) {
                     console.error("Extraction error:", error);
-                    previewText.textContent = 'Error extracting text: ' + error.message;
+                    extractedText = '';
                 }
-            } else {
-                previewText.textContent = 'Preview only available for PDF files. You can still proceed with the analysis.';
-            }
+            } 
         } else {
             selectedFileName.textContent = 'No file selected';
-            document.getElementById('file-preview-container').classList.add('hidden');
             extractedText = '';
         }
     });
-
-    // Close preview
-    document.getElementById('close-preview')?.addEventListener('click', () => {
-        document.getElementById('file-preview-container').classList.add('hidden');
-    });
-
     analyzeBtn.addEventListener('click', async () => {
         try {
             const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -141,20 +125,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             li.textContent = s;
             suggestionsList.appendChild(li);
         });
-
-        const resumePreviewContent = document.getElementById('resume-preview-content');
-        if (data.extractedResumeText || extractedText) {
-            resumePreviewContent.textContent = data.extractedResumeText || extractedText;
-            document.querySelector('.resume-preview-section').classList.remove('hidden');
-        }
     }
 
-    document.getElementById('resume-preview-toggle')?.addEventListener('click', () => {
-        const content = document.getElementById('resume-preview-content');
-        const chevron = document.querySelector('#resume-preview-toggle .chevron');
-        content.classList.toggle('hidden');
-        chevron.textContent = content.classList.contains('hidden') ? '▼' : '▲';
-    });
 
     function renderKeywords(containerId, keywords) {
         const container = document.getElementById(containerId);

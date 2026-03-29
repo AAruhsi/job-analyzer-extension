@@ -96,6 +96,7 @@ textarea:focus {
     font-weight: 600;
     cursor: pointer;
     transition: transform 0.2s, opacity 0.2s;
+    margin-top: 10px;
 }
 
 .primary-btn:hover {
@@ -207,8 +208,13 @@ h4 {
     border-radius: 50%;
 }
 
-.green { background-color: var(--success); }
-.red { background-color: var(--error); }
+.green {
+    background-color: var(--success);
+}
+
+.red {
+    background-color: var(--error);
+}
 
 .keyword-tags {
     display: flex;
@@ -228,6 +234,7 @@ h4 {
     font-size: 13px;
     line-height: 1.5;
     color: var(--text-muted);
+    text-align: justify;
 }
 
 /* Loading state */
@@ -251,12 +258,21 @@ h4 {
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Tabs */
