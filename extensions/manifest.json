@@ -10,6 +10,7 @@
     "host_permissions": [
         "*://*.linkedin.com/*",
         "*://*.indeed.com/*",
+        "*://*.glassdoor.co.in/*",
         "http://localhost:3001/*",
         "http://localhost:5001/*",
         "http://localhost:5005/*"
@@ -21,7 +22,8 @@
         {
             "matches": [
                 "*://*.linkedin.com/*",
-                "*://*.indeed.com/*"
+                "*://*.indeed.com/*",
+                "*://*.glassdoor.co.in/*"
             ],
             "js": [
                 "content.js"

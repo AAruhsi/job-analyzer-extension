@@ -6,6 +6,8 @@ if (window.jobalyticsLoaded) {
 
 function getJobDescription() {
     const selectors = [
+        '[class*="JobDetails_jobDescription"][class*="JobDetails_showHidden"]',
+        '[class*="JobDetails_jobDescription"]',
         '.jobs-description__container',
         '.jobs-description-content__text',
         '.jobs-box__html-content',
@@ -16,6 +18,7 @@ function getJobDescription() {
         '#jobDescriptionText',
         '.jobsearch-JobComponent-description',
         '.jobsearch-DescriptionSection-section--jobFullText'
+
     ];
 
     for (const selector of selectors) {
